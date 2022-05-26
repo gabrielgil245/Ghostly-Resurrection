@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput;
     private bool _canJump = true;
     public bool _isGhost = false;
+    private float _verticalInput;
     
     // Start is called before the first frame update
     void Awake() {
@@ -26,15 +27,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
-        Jump();
-        Falling();
-        Movement();
+        GetHorizontalInput();
+        GetVerticalInput();
         SetFacingDirection();
+        if(_isGhost) {
+            Floating();
+            HorizontalMovement();
+            VerticalMovement();
+        } else {
+            Jump();
+            Falling();
+            HorizontalMovement();
+        }
     }
 
-    void GetInput() {
+    void GetHorizontalInput() {
         _horizontalInput = Input.GetAxis("Horizontal");
+    }
+    
+    void GetVerticalInput() {
+        _verticalInput = Input.GetAxis("Vertical");
     }
 
     void Jump() {
@@ -51,9 +63,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Movement() {
+    void Floating() {
+        _rb.Sleep();
+        _rb.gravityScale = 0f;
+        _rb.WakeUp();
+    }
+
+    void HorizontalMovement() {
         if(Mathf.Abs(_horizontalInput) > 0) {
             transform.Translate(Vector2.right * _horizontalInput * _speed * Time.deltaTime);
+        }
+    }
+
+    void VerticalMovement() {
+        if(Mathf.Abs(_verticalInput) > 0) {
+            transform.Translate(Vector2.up * _verticalInput * _speed * Time.deltaTime);
         }
     }
 
