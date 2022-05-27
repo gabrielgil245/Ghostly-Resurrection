@@ -11,6 +11,7 @@ public class DeathTrigger : MonoBehaviour
                 player._isGhost = true;
             } else {
                 Debug.Log("Player is officially dead...");
+                other.gameObject.SetActive(false);
             }
         }
     }
