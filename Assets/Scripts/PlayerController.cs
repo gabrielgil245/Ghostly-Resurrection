@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _fallMultiplier;
+    [SerializeField] private GameObject _ghost;
     
     private Rigidbody2D _rb;
     private float _horizontalInput;
@@ -31,14 +32,20 @@ public class PlayerController : MonoBehaviour
         GetVerticalInput();
         SetFacingDirection();
         if(_isGhost) {
+            SpriteChange();
             Floating();
             HorizontalMovement();
             VerticalMovement();
         } else {
+            SpriteChange();
             Jump();
             Falling();
             HorizontalMovement();
         }
+    }
+
+    void SpriteChange() {
+        _ghost.SetActive(_isGhost);
     }
 
     void GetHorizontalInput() {
