@@ -12,10 +12,6 @@ public class DeathTrigger : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             if(!player._isGhost) {
                 player._isGhost = true;
-            } else {
-                player._isReallyDead = true;
-                other.gameObject.SetActive(false);
-                StartCoroutine(ResetLevel());
             }
         }
     }
