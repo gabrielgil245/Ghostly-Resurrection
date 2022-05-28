@@ -20,7 +20,7 @@ public class DeathTrigger : MonoBehaviour
         }
     }
 
-    IEnumerator ResetLevel() {
+    public IEnumerator ResetLevel() {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = _levelExitSlowMoFactor;
         yield return new WaitForSecondsRealtime(_levelLoadDelay);
