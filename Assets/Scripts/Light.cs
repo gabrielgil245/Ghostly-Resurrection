@@ -49,7 +49,7 @@ public class Light : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.tag == "Player") {
+        if(other.tag == "Player" && other.gameObject.activeSelf) {
             _playerSprite.color = Color.red;
         }
     }
