@@ -13,8 +13,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private float _horizontalInput;
     private bool _canJump = true;
-    public bool _isGhost = false;
     private float _verticalInput;
+    public bool _isGhost = false;
+    public bool _isReallyDead = false;
     
     // Start is called before the first frame update
     void Awake() {
